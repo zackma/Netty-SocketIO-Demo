@@ -1,7 +1,9 @@
 package com.demo.common;
 
 import com.demo.blog.BlogController;
+import com.demo.common.model._MappingKit;
 import com.demo.index.IndexController;
+import com.demo.user.UserController;
 import com.jfinal.aop.Duang;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -11,7 +13,9 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import controller.SocketioController;
 import server.SocketServer;
@@ -59,6 +63,7 @@ public class DemoConfig extends JFinalConfig {
 		me.add("/", IndexController.class, "/index");	// 第三个参数为该Controller的视图存放路径
 		me.add("/blog", BlogController.class);			// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
 		me.add("/socket", SocketioController.class,"/socketio");
+		me.add("/user", UserController.class);
 	}
 	
 	public void configEngine(Engine me) {
@@ -71,14 +76,13 @@ public class DemoConfig extends JFinalConfig {
 	 */
 	public void configPlugin(Plugins me) {
 		// 配置 druid 数据库连接池插件
-//		DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password").trim());
-//		me.add(druidPlugin);
-		
+		DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password").trim());
+		me.add(druidPlugin);
 		// 配置ActiveRecord插件
-//		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		// 所有映射在 MappingKit 中自动化搞定
-//		_MappingKit.mapping(arp);
-//		me.add(arp);
+		_MappingKit.mapping(arp);
+		me.add(arp);
 	}
 	
 	public static DruidPlugin createDruidPlugin() {

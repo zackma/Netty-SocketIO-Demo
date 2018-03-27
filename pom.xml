@@ -68,6 +68,18 @@
     	<scope>compile</scope>
     </dependency>
     <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-jsp</artifactId>
+	    <version>8.1.8.v20121106</version>
+	    <scope>provided</scope>
+	    <exclusions>
+		    <exclusion>
+			    <groupId>org.eclipse.jetty.orbit</groupId>
+			    <artifactId>javax.servlet.jsp.jstl</artifactId>
+		    </exclusion>
+	    </exclusions>
+    </dependency>
+    <dependency>
     	<groupId>com.jfinal</groupId>
     	<artifactId>jfinal</artifactId>
     	<version>3.3</version>
@@ -102,6 +114,24 @@
     	<groupId>com.jfinal</groupId>
     	<artifactId>cos</artifactId>
     	<version>2017.5</version>
+    </dependency>
+    <!-- JSTL标签类 -->
+    <dependency>
+	    <groupId>jstl</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+    </dependency>
+
+    <dependency>
+	    <groupId>com.thetransactioncompany</groupId>
+	    <artifactId>cors-filter</artifactId>
+	    <version>1.7</version>
+    </dependency>
+
+    <dependency>
+	   <groupId>com.alibaba</groupId>
+	   <artifactId>fastjson</artifactId>
+	   <version>1.2.31</version>
     </dependency>
 	
   </dependencies>
